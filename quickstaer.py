@@ -1,3 +1,4 @@
+from ast import mod
 import torch
 from torch import nn
 from torch.utils.data import DataLoader
@@ -98,3 +99,6 @@ for t in range(epochs):
   train(train_data_loader, model, loss_fn, optimizer)
   test(test_data_loader, model, loss_fn)
 print("Done!")
+
+torch.save(model.state_dict(), "model.pth")
+print("Saved Pytorch Model State to model.py")
