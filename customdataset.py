@@ -1,11 +1,13 @@
-import os 
+import os
+from random import shuffle 
 import pandas as pd
 from torchvision.io import read_image
 from torch.utils.data import Dataset
+from torch.utils.data import DataLoader
 
 class CustomImageDataset(Dataset):
-  def __init__(self, annotation_file, img_dir, transform=None, target_transform=None):
-    self.img_labels = pd.read_csv(annotation_file)
+  def __init__(self, annotations_file, img_dir, transform=None, target_transform=None):
+    self.img_labels = pd.read_csv(annotations_file)
     self.img_dir = img_dir
     self.transform = transform
     self.target_transform = target_transform
@@ -22,3 +24,14 @@ class CustomImageDataset(Dataset):
     if self.target_transform:
       label = self.target_transform(label)
     return image, label
+  
+
+annotations_file = "./annotations.csv"
+img_dir = "./images"
+
+dataset = CustomImageDataset(annotations_file=annotations_file, img_dir=img_dir)
+dataloader = DataLoader(dataset, batch_size=1, shuffle=True)
+
+for images, labels in dataloader:
+  print(images, labels)
+  break
