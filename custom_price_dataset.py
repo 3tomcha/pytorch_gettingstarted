@@ -17,24 +17,40 @@ data.dropna(inplace=True)
 # print(data.head())
 
 # eth_timeを日時型に変換
-data["eth_time"] = pd.to_datetime(data["eth_time"], errors="coerce", utc=True)
+# data["eth_time"] = pd.to_datetime(data["eth_time"], errors="coerce", utc=True)
+data["btc_time"] = pd.to_datetime(data["btc_time"], errors="coerce", utc=True)
 
-# print(data["eth_time"].dtype)
-# print(data[data["eth_time"].isna()])
 
 # 日時情報を数値特徴に変換（例：年、月、日、時間）
-data["year"] = data["eth_time"].dt.year
-data["month"] = data["eth_time"].dt.month
-data["day"] = data["eth_time"].dt.day
-data["hour"] = data["eth_time"].dt.hour
+data["year"] = data["btc_time"].dt.year
+data["month"] = data["btc_time"].dt.month
+data["day"] = data["btc_time"].dt.day
+data["hour"] = data["btc_time"].dt.hour
 
-# 元の"eth_time"列を削除
 data.drop("eth_time", axis=1, inplace=True)
-data.drop("btc_time", axis=1, inplace=True)
+data.drop("eth_price", axis=1, inplace=True)
+data.drop("eth_high", axis=1, inplace=True)
+data.drop("eth_low", axis=1, inplace=True)
+data.drop("eth_24hourhigh", axis=1, inplace=True)
+data.drop("eth_24hourlow", axis=1, inplace=True)
+data.drop("eth_nexthourprice", axis=1, inplace=True)
+data.drop("eth_nextdayprice", axis=1, inplace=True)
+data.drop("eth_nextweekprice", axis=1, inplace=True)
+
+data.drop("btc_high", axis=1, inplace=True)
+data.drop("btc_low", axis=1, inplace=True)
+data.drop("btc_24hourhigh", axis=1, inplace=True)
+data.drop("btc_24hourlow", axis=1, inplace=True)
+data.drop("btc_nexthourprice", axis=1, inplace=True)
+data.drop("btc_nextdayprice", axis=1, inplace=True)
+data.drop("btc_nextweekprice", axis=1, inplace=True)
+
 
 # 特微量とターゲットを定義する
-X = data.drop(["eth_price"], axis=1)
-y = data[["eth_price"]]
+X = data.drop(["btc_time", "btc_price"], axis=1)
+y = data[["btc_price"]]
+
+print(X.head())
 
 # データの正規化
 scaler = MinMaxScaler()
