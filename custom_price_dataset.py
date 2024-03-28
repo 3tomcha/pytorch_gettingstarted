@@ -5,6 +5,7 @@ from sklearn.model_selection import train_test_split
 from torch import nn
 import torch.optim as optim
 import numpy as np
+import joblib
 
 data = pd.read_csv("./eth_btc_pricedata.csv")
 
@@ -38,6 +39,9 @@ y = data[["eth_price"]]
 # データの正規化
 scaler = MinMaxScaler()
 X_scaled = scaler.fit_transform(X)
+
+# scalerの保存
+joblib.dump(scaler, "scaler.joblib")
 
 # Numpy配列をPyTorchテンソルに変換する
 X_tensor = torch.tensor(X_scaled, dtype=torch.float32)
