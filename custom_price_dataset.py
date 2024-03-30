@@ -90,7 +90,7 @@ criterion = nn.MSELoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 # モデルをトレーニングする
-num_epochs = 50
+num_epochs = 5000
 for epoch in range(num_epochs):
     model.train()
     optimizer.zero_grad()
