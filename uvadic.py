@@ -86,3 +86,22 @@ print(x[:, 1])
 print(x[0])
 print(x[:2, -1])
 print(x[1:3, :])
+
+x = torch.ones((3,))
+print(x.requires_grad)
+
+x.requires_grad_(True)
+print(x.requires_grad)
+
+x = torch.arange(3, dtype=torch.float32, requires_grad=True)
+print("X: ", x)
+
+a = x + 2
+b = a ** 2
+c = b + 3
+y = c.mean()
+print("Y", y)
+
+y.backward()
+
+print(x.grad)
