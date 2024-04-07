@@ -69,3 +69,4 @@ with torch.no_grad():
     correct += (predicted == y_test).sum().item()
 
 print(f'Accuracy of the network on the test data: {100 * correct / total} %')
+torch.save(model, "1hupdown_model.pth")
