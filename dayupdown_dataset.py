@@ -65,3 +65,5 @@ with torch.no_grad():
 
 accuracy = 100 * correct / total
 print(f'Accuracy on test set: {accuracy:.2f}%')
+
+torch.save(model, "dayupdownmodel.pth")
