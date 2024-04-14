@@ -11,7 +11,7 @@
 #
 # Happy Coding!
 
-service: pytorch-gettingstarted
+service: pytorch-gettingstarted2
 # app and org for use with dashboard.serverless.com
 #app: your-app-name
 #org: your-org-name
@@ -69,8 +69,9 @@ functions:
 custom:
   wsgi:
     app: api.app
-  pythonRequirements:
-    dockerizePip: true
+    packRequirements: false
+  # pythonRequirements:
+  #   dockerizePip: true
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
