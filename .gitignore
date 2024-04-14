@@ -18,3 +18,9 @@ var/
 
 # Serverless directories
 .serverless
+
+*.zip
+__pycache__/
+data/
+*.json
+*.tar
