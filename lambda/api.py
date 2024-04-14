@@ -25,9 +25,10 @@ model = SimpleNN()
 model.load_state_dict(torch.load("1hupdown_model_state.pth"))
 model.eval()
 
-@app.route("/predict", methods=["POST"])    
+@app.route('/predict', methods=['POST'])
 def predict():
-  data = request.get_json(force=True)      
-  return jsonify({'data': data})
-  # with torch.no_grad():
-  # outputs = model(input_data)
+    data = request.get_json(silent=True)
+    input_data = torch.FloatTensor([data['features']])
+    outputs = model(input_data)
+    _, predicted = torch.max(outputs.data, 1)
+    return jsonify({'prediction': predicted.item()})
