@@ -2,15 +2,15 @@ from torch import nn
 import torch
 
 # ニューラルネットワークモデルを定義する
-class NeuralNetwork(nn.Module):
-    def __init__(self, input_size, hidden_size1, hidden_size2, output_size):
-        super(NeuralNetwork, self).__init__()
-        self.fc1 = nn.Linear(input_size, hidden_size1)
-        self.fc2 = nn.Linear(hidden_size1, hidden_size2)
-        self.fc3 = nn.Linear(hidden_size2, output_size)
+class SimpleNN(nn.Module):
+    def __init__(self):
+        super(SimpleNN, self).__init__()
+        self.fc1 = nn.Linear(6, 10)  # 入力層→隠れ層
+        self.relu = nn.ReLU()
+        self.fc2 = nn.Linear(10, 2)  # 隠れ層→出力層
 
     def forward(self, x):
-        x = torch.relu(self.fc1(x))
-        x = torch.relu(self.fc2(x))
-        x = self.fc3(x)
+        x = self.fc1(x)
+        x = self.relu(x)
+        x = self.fc2(x)
         return x

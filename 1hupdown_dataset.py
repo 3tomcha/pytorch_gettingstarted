@@ -7,6 +7,7 @@ from sklearn.model_selection import train_test_split
 import numpy as np
 import csv
 import pandas as pd
+from neural_network import SimpleNN
 
 # load csv data
 df = pd.read_csv("ohlcv.csv")
@@ -27,20 +28,6 @@ print(X_train)
 
 train_dataset = TensorDataset(X_train, y_train)
 train_loader = DataLoader(dataset=train_dataset, batch_size=16, shuffle=True)
-
-
-class SimpleNN(nn.Module):
-    def __init__(self):
-        super(SimpleNN, self).__init__()
-        self.fc1 = nn.Linear(6, 10)  # 入力層→隠れ層
-        self.relu = nn.ReLU()
-        self.fc2 = nn.Linear(10, 2)  # 隠れ層→出力層
-
-    def forward(self, x):
-        x = self.fc1(x)
-        x = self.relu(x)
-        x = self.fc2(x)
-        return x
 
 model = SimpleNN()
 
@@ -69,4 +56,4 @@ with torch.no_grad():
     correct += (predicted == y_test).sum().item()
 
 print(f'Accuracy of the network on the test data: {100 * correct / total} %')
-torch.save(model, "1hupdown_model.pth")
+torch.save(model.state_dict(), "1hupdown_model_state.pth")
